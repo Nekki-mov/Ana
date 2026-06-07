@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Ana
+Name[es]=Ana
+Name[ja]=Ana
+Comment=Learn about Wagashi Linux
+Comment[es]=Aprende sobre Wagashi Linux
+Comment[ja]=Wagashi Linuxについて学ぶ
+Exec=/usr/local/bin/ana
+Icon=ana
+Terminal=false
+Type=Application
+Categories=Education;
