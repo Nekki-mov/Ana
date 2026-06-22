@@ -16,81 +16,80 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont, QPixmap, QIcon
 
-FONT_ANA  = "Klee One"
-FONT_BODY = "Literata"
+FONT_ANA     = "Klee One"
+FONT_BODY    = "Literata"
 FONT_BODY_JA = "Noto Serif CJK JP"
-
-def get_body_font_family(lang="en"):
-    return FONT_BODY_JA if lang == "ja" else FONT_BODY
 
 CONFIG_PATH = os.path.expanduser("~/.config/ana/config.json")
 ICON_PATH = os.path.expanduser("~/Ana/assets/Ana_Notebook.png")
 
-THEME_LIGHT = {
-    "name":       "light",
-    "bg":         "#f0d8c0",
-    "surface":    "#e8c8b0",
-    "accent":     "#d890a8",
-    "text":       "#3a2a0a",
-    "text_muted": "#7a5c3a",
-    "border":     "#d4b898",
-}
+CARD_RADIUS = 18
+INNER_RADIUS = 12
 
-THEME_DARK = {
-    "name":       "dark",
-    "bg":         "#000030",
-    "surface":    "#181848",
-    "accent":     "#906090",
-    "text":       "#d8f0f0",
-    "text_muted": "#8090a0",
-    "border":     "#2a2a60",
+# ─── Themes ───────────────────────────────────────────────────────────────────
+
+THEMES = {
+    # Clannad · Dango Family — the softest one. Pastel, round, warm. Home.
+    "light": {
+        "app_bg": "#f0e6d2", "card": "#fffaf2", "card2": "#f5e8d5",
+        "accent": "#d890a8", "accent2": "#a8c0d8",
+        "text": "#3a2a0a", "text_muted": "#7a5c3a", "hover": "#f0ddc8",
+        "highlight": "#d8d8a8",
+    },
+    # Clannad · Firefly — late night emotion, soft purple dark
+    "dark": {
+        "app_bg": "#000010", "card": "#10102c", "card2": "#181840",
+        "accent": "#906090", "accent2": "#c0c0d8",
+        "text": "#d8f0f0", "text_muted": "#9090b8", "hover": "#1c1c44",
+        "highlight": "#d8a890",
+    },
+    # Sayuri — fixed monochrome + coral
+    "sayuri": {
+        "app_bg": "#000000", "card": "#0d0d0d", "card2": "#161616",
+        "accent": "#e8a0a0", "accent2": "#e8a0a0",
+        "text": "#e8e8e8", "text_muted": "#787878", "hover": "#1a1a1a",
+        "highlight": "#e8a0a0",
+    },
 }
 
 LANG_STRINGS = {
     "en": {
-        "change_lang":   "Let's try another language",
-        "reading_time":  "Reading time: {} min",
-        "not_written":   "This page hasn't been written yet.",
-        "check_back":    "Check back soon.",
-        "wagashi":       "Wagashi Linux",
-        "welcome_sub":   "Relax.\nWe'll figure it out.",
+        "change_lang":  "Let's try another language",
+        "reading_time": "Reading time: {} min",
+        "not_written":  "This page hasn't been written yet.",
+        "check_back":   "Check back soon.",
+        "wagashi":      "Wagashi Linux",
+        "welcome_sub":  "Relax.\nWe'll figure it out.",
     },
     "es": {
-        "change_lang":   "Este idioma no me gusta",
-        "reading_time":  "Tiempo de lectura: {} min",
-        "not_written":   "Esta página todavía no está escrita.",
-        "check_back":    "Vuelve pronto.",
-        "wagashi":       "Wagashi Linux",
-        "welcome_sub":   "Tranquilidad.\nMente fría.\nVamos a resolverlo.",
+        "change_lang":  "Este idioma no me gusta",
+        "reading_time": "Tiempo de lectura: {} min",
+        "not_written":  "Esta página todavía no está escrita.",
+        "check_back":   "Vuelve pronto.",
+        "wagashi":      "Wagashi Linux",
+        "welcome_sub":  "Tranquilidad.\nMente fría.\nVamos a resolverlo.",
     },
     "ja": {
-        "change_lang":   "別の言語にしてみよう",
-        "reading_time":  "読む時間：{}分",
-        "not_written":   "このページはまだ書かれていません。",
-        "check_back":    "またね。",
-        "wagashi":       "Wagashi Linux",
-        "welcome_sub":   "大丈夫。\n一緒に考えよう。",
+        "change_lang":  "別の言語にしてみよう",
+        "reading_time": "読む時間：{}分",
+        "not_written":  "このページはまだ書かれていません。",
+        "check_back":   "またね。",
+        "wagashi":      "Wagashi Linux",
+        "welcome_sub":  "大丈夫。\n一緒に考えよう。",
     },
 }
 
 BOOKS = [
     {
-        "id": "zero",
-        "icon": "📖",
+        "id": "zero", "icon": "📖",
         "title": {"en": "Now what?", "es": "¿Y ahora qué?", "ja": "次は何しよう？"},
         "subtitle": {"en": "Before we start", "es": "Antes de empezar", "ja": "始める前に"},
         "chapters": [
-            {
-                "title": {"en": "Welcome", "es": "Bienvenida", "ja": "ようこそ"},
-                "file": "basics/welcome.md",
-                "reading_time": 4,
-                "music": ("Pumuky", "Teoria de Cuerdas"),
-            },
+            {"title": {"en": "Welcome", "es": "Bienvenida", "ja": "ようこそ"}, "file": "basics/welcome.md", "reading_time": 4, "music": ("Pumuky", "Teoria de Cuerdas")},
         ]
     },
     {
-        "id": "basics",
-        "icon": "📘",
+        "id": "basics", "icon": "📘",
         "title": {"en": "Basics", "es": "Básicos", "ja": "基本"},
         "subtitle": {"en": "Desktop and first steps", "es": "Escritorio y primeros pasos", "ja": "デスクトップと最初のステップ"},
         "chapters": [
@@ -101,8 +100,7 @@ BOOKS = [
         ]
     },
     {
-        "id": "troubleshooting",
-        "icon": "🔧",
+        "id": "troubleshooting", "icon": "🔧",
         "title": {"en": "When something isn't working", "es": "Cuando algo no funciona", "ja": "うまくいかないとき"},
         "subtitle": {"en": "Common problems and fixes", "es": "Problemas comunes y soluciones", "ja": "よくある問題と解決方法"},
         "chapters": [
@@ -112,8 +110,7 @@ BOOKS = [
         ]
     },
     {
-        "id": "advanced",
-        "icon": "📚",
+        "id": "advanced", "icon": "📚",
         "title": {"en": "I want to learn more", "es": "Quiero aprender más", "ja": "もっと知りたい"},
         "subtitle": {"en": "Terminal, config, customization", "es": "Terminal, configuración, personalización", "ja": "ターミナル・設定・カスタマイズ"},
         "chapters": [
@@ -123,14 +120,13 @@ BOOKS = [
         ]
     },
     {
-        "id": "places",
-        "icon": "🗺️",
+        "id": "places", "icon": "🗺️",
         "title": {"en": "Places worth visiting", "es": "Sitios que merece la pena ver", "ja": "行く価値のある場所"},
         "subtitle": {"en": "Resources, links, community", "es": "Recursos, enlaces, comunidad", "ja": "リソース・リンク・コミュニティ"},
         "chapters": [
             {"title": {"en": "Arch Wiki",     "es": "Arch Wiki",     "ja": "Arch Wiki"},     "file": "places/archwiki.md",     "reading_time": 3, "music": ("Ivan Ferreiro",  "El Equilibrio es Imposible")},
             {"title": {"en": "Linux Journey", "es": "Linux Journey", "ja": "Linux Journey"}, "file": "places/linuxjourney.md", "reading_time": 2, "music": ("The Peggies",    "Ashita mo")},
-            {"title": {"en": "Community",     "es": "Comunidad",     "ja": "コミュニティ"},   "file": "places/community.md",    "reading_time": 3, "music": ("Gorillaz",       "Feel Good Inc.")},
+            {"title": {"en": "Community",     "es": "Comunidad",     "ja": "コミュニティ"},   "file": "places/community.md",    "reading_time": 3, "music": ("Mago de Oz",      "Y Ahora Voy A Salir")},
         ]
     },
 ]
@@ -138,18 +134,31 @@ BOOKS = [
 # ─── Config ───────────────────────────────────────────────────────────────────
 
 def load_config():
-    if os.path.exists(CONFIG_PATH):
-        try:
-            with open(CONFIG_PATH, "r") as f:
-                return json.load(f)
-        except Exception:
-            pass
-    return {}
+    try:
+        with open(CONFIG_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {}
 
 def save_config(data):
     os.makedirs(os.path.dirname(CONFIG_PATH), exist_ok=True)
     with open(CONFIG_PATH, "w") as f:
         json.dump(data, f)
+
+def detect_edition():
+    try:
+        with open("/etc/os-release") as f:
+            for line in f:
+                if line.startswith("VARIANT_ID="):
+                    return line.strip().split("=", 1)[1].strip('"').lower()
+    except Exception:
+        pass
+    return "ayu"
+
+def get_theme_key(edition, dark):
+    if edition == "sayuri":
+        return "sayuri"
+    return "dark" if dark else "light"
 
 # ─── Fonts ────────────────────────────────────────────────────────────────────
 
@@ -164,6 +173,9 @@ def body_font(size=13, bold=False, italic=False, lang="en"):
     if italic:
         f.setItalic(True)
     return f
+
+def get_body_font_family(lang="en"):
+    return FONT_BODY_JA if lang == "ja" else FONT_BODY
 
 # ─── Markdown ─────────────────────────────────────────────────────────────────
 
@@ -191,17 +203,31 @@ def md_to_html(text, theme, lang="en"):
             out.append("<p style='margin:0 0 6px 0;line-height:1.5;font-family:" + font_stack + ";font-size:15px;color:" + ct + ";'>" + line + "</p>")
     return "".join(out)
 
+# ─── Floating card base ───────────────────────────────────────────────────────
+
+class Card(QFrame):
+    def __init__(self, theme, radius=CARD_RADIUS, parent=None):
+        super().__init__(parent)
+        t = theme
+        self.setStyleSheet(f"QFrame{{background:{t['card']}; border:none; border-radius:{radius}px;}}")
+
 # ─── Language Selector ────────────────────────────────────────────────────────
 
-class LangButton(QWidget):
+class LangButton(QFrame):
     def __init__(self, flag, line1, line2, lang_code, theme, on_select, parent=None):
         super().__init__(parent)
         self.lang_code = lang_code
         self.on_select = on_select
         self.theme = theme
         self.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.setFixedHeight(100)
+        self.setFixedHeight(96)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+
+        t = theme
+        self.setStyleSheet(
+            f"QFrame{{background:{t['card2']}; border:none; border-radius:{INNER_RADIUS}px;}}"
+            f"QFrame:hover{{background:{t['hover']};}}"
+        )
 
         lay = QVBoxLayout(self)
         lay.setContentsMargins(24, 16, 24, 16)
@@ -209,21 +235,16 @@ class LangButton(QWidget):
 
         l1 = QLabel(flag + "  " + line1)
         l1.setFont(ana_font(15))
-        l1.setStyleSheet("color:" + theme["text"] + ";background:transparent;")
+        l1.setStyleSheet(f"color:{t['text']}; background:transparent; border:none;")
         l1.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
 
         l2 = QLabel(line2)
         l2.setFont(body_font(10, italic=True))
-        l2.setStyleSheet("color:" + theme["text_muted"] + ";background:transparent;")
+        l2.setStyleSheet(f"color:{t['text_muted']}; background:transparent; border:none;")
         l2.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
 
         lay.addWidget(l1)
         lay.addWidget(l2)
-
-        self.setStyleSheet(
-            "QWidget{background:transparent;border:1px solid " + theme["border"] + ";border-radius:10px;}"
-            "QWidget:hover{background:" + theme["surface"] + ";}"
-        )
 
     def mousePressEvent(self, e):
         self.on_select(self.lang_code)
@@ -234,20 +255,20 @@ class LanguageScreen(QWidget):
         super().__init__(parent)
         self.theme = theme
         self.on_select = on_select
-        self.setStyleSheet("background:" + theme["bg"] + ";")
+        self.setStyleSheet(f"background:{theme['app_bg']};")
         self._build()
 
     def _build(self):
         t = self.theme
         outer = QVBoxLayout(self)
         outer.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        outer.setContentsMargins(0, 0, 0, 0)
+        outer.setContentsMargins(40, 40, 40, 40)
 
         inner = QWidget()
         inner.setFixedWidth(420)
         inner.setStyleSheet("background:transparent;")
         lay = QVBoxLayout(inner)
-        lay.setSpacing(12)
+        lay.setSpacing(14)
         lay.setContentsMargins(0, 0, 0, 0)
 
         es_btn = LangButton("🇪🇸", "Hola.", "Háblame en español", "es", t, self.on_select)
@@ -264,7 +285,7 @@ class LanguageScreen(QWidget):
 
 # ─── Sidebar ──────────────────────────────────────────────────────────────────
 
-class BookItem(QWidget):
+class BookItem(QFrame):
     def __init__(self, book, lang, theme, on_click, parent=None):
         super().__init__(parent)
         self.book = book
@@ -278,7 +299,7 @@ class BookItem(QWidget):
 
     def _build(self):
         lay = QVBoxLayout(self)
-        lay.setContentsMargins(20, 10, 16, 10)
+        lay.setContentsMargins(16, 10, 14, 10)
         lay.setSpacing(3)
 
         title = self.book["icon"] + "  " + self.book["title"][self.lang]
@@ -304,18 +325,24 @@ class BookItem(QWidget):
 
     def _style(self):
         t = self.theme
-        self.t_lbl.setStyleSheet("color:" + t["text"] + ";background:transparent;")
-        self.s_lbl.setStyleSheet("color:" + t["text_muted"] + ";background:transparent;")
+        self.t_lbl.setStyleSheet(f"color:{t['text']}; background:transparent; border:none;")
+        self.s_lbl.setStyleSheet(f"color:{t['text_muted']}; background:transparent; border:none;")
+        radius = INNER_RADIUS
         if self._active:
-            self.setStyleSheet("QWidget{background:" + t["surface"] + ";border-left:3px solid " + t["accent"] + ";}")
+            self.setStyleSheet(f"QFrame{{background:{t['accent']}; border:none; border-radius:{radius}px;}}")
+            self.t_lbl.setStyleSheet(f"color:{t['card']}; background:transparent; border:none; font-weight:bold;")
+            self.s_lbl.setStyleSheet(f"color:{t['card']}; background:transparent; border:none;")
         else:
-            self.setStyleSheet("QWidget{background:transparent;border-left:3px solid transparent;}QWidget:hover{background:" + t["surface"] + ";}")
+            self.setStyleSheet(
+                f"QFrame{{background:transparent; border:none; border-radius:{radius}px;}}"
+                f"QFrame:hover{{background:{t['hover']};}}"
+            )
 
     def mousePressEvent(self, e):
         self.on_click(self.book, self)
 
 
-class ChapterItem(QWidget):
+class ChapterItem(QFrame):
     def __init__(self, chapter, book, lang, theme, on_click, parent=None):
         super().__init__(parent)
         self.chapter = chapter
@@ -330,7 +357,7 @@ class ChapterItem(QWidget):
 
     def _build(self):
         lay = QHBoxLayout(self)
-        lay.setContentsMargins(36, 0, 16, 0)
+        lay.setContentsMargins(32, 0, 14, 0)
         self.lbl = QLabel(self.chapter["title"][self.lang])
         self.lbl.setFont(body_font(10, lang=self.lang))
         self.lbl.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents)
@@ -344,20 +371,24 @@ class ChapterItem(QWidget):
     def _style(self):
         t = self.theme
         if self._active:
-            self.lbl.setStyleSheet("color:" + t["accent"] + ";background:transparent;font-weight:600;")
+            self.lbl.setStyleSheet(f"color:{t['accent']}; background:transparent; border:none; font-weight:600;")
         else:
-            self.lbl.setStyleSheet("color:" + t["text_muted"] + ";background:transparent;")
-        self.setStyleSheet("QWidget{background:transparent;border-radius:4px;}QWidget:hover{background:" + t["surface"] + ";}")
+            self.lbl.setStyleSheet(f"color:{t['text_muted']}; background:transparent; border:none;")
+        self.setStyleSheet(
+            f"QFrame{{background:transparent; border:none; border-radius:{INNER_RADIUS-4}px;}}"
+            f"QFrame:hover{{background:{t['hover']};}}"
+        )
 
     def mousePressEvent(self, e):
         self.on_click(self.chapter, self.book, self)
 
 
-class Sidebar(QWidget):
-    def __init__(self, lang, theme, on_chapter, on_toggle_theme, on_change_lang, parent=None):
+class Sidebar(QFrame):
+    def __init__(self, lang, theme, edition, on_chapter, on_toggle_theme, on_change_lang, parent=None):
         super().__init__(parent)
         self.lang = lang
         self.theme = theme
+        self.edition = edition
         self.on_chapter = on_chapter
         self.on_toggle_theme = on_toggle_theme
         self.on_change_lang = on_change_lang
@@ -370,56 +401,54 @@ class Sidebar(QWidget):
 
     def _build(self):
         t = self.theme
-        s = LANG_STRINGS[self.lang]
-        self.setStyleSheet("background:" + t["surface"] + ";")
+        self.setStyleSheet(f"QFrame{{background:{t['card']}; border:none; border-radius:{CARD_RADIUS}px;}}")
         self._lay = QVBoxLayout(self)
         self._lay.setContentsMargins(0, 0, 0, 0)
         self._lay.setSpacing(0)
 
-        # Header
-        hdr = QWidget()
-        hdr.setFixedHeight(56)
-        hdr.setStyleSheet("background:transparent;")
-        hl = QHBoxLayout(hdr)
-        hl.setContentsMargins(20, 0, 16, 0)
+        header = QFrame()
+        header.setStyleSheet("background:transparent; border:none;")
+        hl = QHBoxLayout(header)
+        hl.setContentsMargins(18, 16, 14, 10)
 
         name = QLabel("Ana")
         name.setFont(ana_font(22))
-        name.setStyleSheet("color:" + t["text"] + ";background:transparent;")
+        name.setStyleSheet(f"color:{t['text']}; background:transparent; border:none;")
 
         self.tog = QPushButton("◐")
         self.tog.setFixedSize(30, 30)
         self.tog.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.tog.setFont(body_font(13))
+        self.tog.setFont(body_font(13, lang=self.lang))
         self.tog.setStyleSheet(
-            "QPushButton{background:transparent;border:1px solid " + t["border"] + ";border-radius:15px;color:" + t["text_muted"] + ";}"
-            "QPushButton:hover{background:" + t["bg"] + ";}"
+            f"QPushButton{{background:transparent;border:1.5px solid {t['hover']};border-radius:15px;color:{t['text_muted']};}}"
+            f"QPushButton:hover{{background:{t['hover']};border-color:{t['accent']};color:{t['accent']};}}"
         )
         self.tog.clicked.connect(self.on_toggle_theme)
+        if self.edition == "sayuri":
+            self.tog.setVisible(False)
 
         hl.addWidget(name)
         hl.addStretch()
         hl.addWidget(self.tog)
-        self._lay.addWidget(hdr)
+        self._lay.addWidget(header)
 
-        div = QFrame()
-        div.setFixedHeight(1)
-        div.setStyleSheet("background:" + t["border"] + ";")
-        self._lay.addWidget(div)
-
-        # Book list
-        self._scroll = QScrollArea()
-        self._scroll.setWidgetResizable(True)
-        self._scroll.setFrameShape(QFrame.Shape.NoFrame)
-        self._scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self._scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self._scroll.setStyleSheet("background:transparent;border:none;")
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setFrameShape(QFrame.Shape.NoFrame)
+        scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        scroll_area.setStyleSheet(
+            "QScrollArea{background:transparent; border:none;}"
+            "QScrollBar:vertical{background:transparent; width:6px; margin:2px;}"
+            f"QScrollBar::handle:vertical{{background:{t['text_muted']}; border-radius:3px; min-height:20px;}}"
+            f"QScrollBar::handle:vertical:hover{{background:{t['accent']};}}"
+            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical{height:0px;}"
+        )
 
         self._inner = QWidget()
         self._inner.setStyleSheet("background:transparent;")
         self._inner_lay = QVBoxLayout(self._inner)
-        self._inner_lay.setContentsMargins(0, 8, 0, 8)
-        self._inner_lay.setSpacing(0)
+        self._inner_lay.setContentsMargins(8, 4, 8, 8)
+        self._inner_lay.setSpacing(2)
 
         self.book_items = []
         for book in BOOKS:
@@ -428,34 +457,33 @@ class Sidebar(QWidget):
             self.book_items.append(bi)
 
         self._inner_lay.addStretch()
-        self._scroll.setWidget(self._inner)
-        self._lay.addWidget(self._scroll)
+        scroll_area.setWidget(self._inner)
+        self._lay.addWidget(scroll_area)
 
-        # Footer
-        ftr = QWidget()
-        ftr.setStyleSheet("background:transparent;")
-        fl = QVBoxLayout(ftr)
-        fl.setContentsMargins(16, 8, 16, 12)
+        footer = QFrame()
+        footer.setStyleSheet("background:transparent; border:none;")
+        fl = QVBoxLayout(footer)
+        fl.setContentsMargins(18, 8, 14, 14)
         fl.setSpacing(6)
 
-        # Change language button
+        s = LANG_STRINGS[self.lang]
         lang_btn = QPushButton(s["change_lang"])
-        lang_btn.setFont(body_font(9))
+        lang_btn.setFont(body_font(8, italic=True, lang=self.lang))
         lang_btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        lang_btn.setFixedHeight(28)
+        lang_btn.setFixedHeight(26)
         lang_btn.setStyleSheet(
-            "QPushButton{background:transparent;border:1px solid " + t["border"] + ";border-radius:6px;color:" + t["text_muted"] + ";padding:0 8px;text-align:center;}"
-            "QPushButton:hover{background:" + t["bg"] + ";color:" + t["accent"] + ";border-color:" + t["accent"] + ";}"
+            f"QPushButton{{background:transparent;border:1px solid {t['hover']};border-radius:8px;color:{t['text_muted']};padding:0 8px;}}"
+            f"QPushButton:hover{{background:{t['hover']};color:{t['accent']};border-color:{t['accent']};}}"
         )
         lang_btn.clicked.connect(self.on_change_lang)
 
         wl = QLabel(s["wagashi"])
-        wl.setFont(body_font(8))
-        wl.setStyleSheet("color:" + t["text_muted"] + ";background:transparent;")
+        wl.setFont(body_font(8, lang=self.lang))
+        wl.setStyleSheet(f"color:{t['text_muted']}; background:transparent; border:none;")
 
         fl.addWidget(lang_btn)
         fl.addWidget(wl)
-        self._lay.addWidget(ftr)
+        self._lay.addWidget(footer)
 
     def _book_clicked(self, book, item):
         if self.active_book:
@@ -492,20 +520,19 @@ class Sidebar(QWidget):
         self.active_chapter = item
         self.on_chapter(chapter, book)
 
-
 # ─── Content ──────────────────────────────────────────────────────────────────
 
 class WelcomeScreen(QWidget):
     def __init__(self, lang, theme, parent=None):
         super().__init__(parent)
-        self.setStyleSheet("background:" + theme["bg"] + ";")
+        self.setStyleSheet("background:transparent;")
         lay = QVBoxLayout(self)
         lay.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lay.setSpacing(12)
 
         icon = QLabel()
         if os.path.exists(ICON_PATH):
-            pix = QPixmap(ICON_PATH).scaled(240, 240, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+            pix = QPixmap(ICON_PATH).scaled(160, 160, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
             icon.setPixmap(pix)
         else:
             icon.setText("📖")
@@ -516,14 +543,14 @@ class WelcomeScreen(QWidget):
         title = QLabel("Ana")
         title.setFont(ana_font(42))
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        title.setStyleSheet("color:" + theme["text"] + ";background:transparent;")
+        title.setStyleSheet(f"color:{theme['text']}; background:transparent;")
 
         sub_text = LANG_STRINGS[lang]["welcome_sub"].replace("\n", "<br>")
         sub = QLabel(sub_text)
         sub.setFont(ana_font(16))
         sub.setTextFormat(Qt.TextFormat.RichText)
         sub.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        sub.setStyleSheet("color:" + theme["text_muted"] + ";background:transparent;text-align:center;")
+        sub.setStyleSheet(f"color:{theme['text_muted']}; background:transparent;")
 
         lay.addStretch()
         lay.addWidget(icon)
@@ -532,79 +559,100 @@ class WelcomeScreen(QWidget):
         lay.addStretch()
 
 
-class ContentView(QWidget):
+class ContentView(QFrame):
     def __init__(self, lang, theme, parent=None):
         super().__init__(parent)
         self.lang = lang
         self.theme = theme
-        self.setStyleSheet("background:" + theme["bg"] + ";")
+        t = theme
+        self.setStyleSheet(f"QFrame{{background:{t['card']}; border:none; border-radius:{CARD_RADIUS}px;}}")
         lay = QVBoxLayout(self)
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setSpacing(0)
 
+        self.stack = QStackedWidget()
+        self.stack.setStyleSheet("background:transparent;")
+
+        self.welcome = WelcomeScreen(lang, theme)
+        self.stack.addWidget(self.welcome)
+
+        # Scroll for chapter content
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
         self.scroll.setFrameShape(QFrame.Shape.NoFrame)
-        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.scroll.setStyleSheet("background:" + theme["bg"] + ";border:none;")
+        self.scroll.setStyleSheet(
+            "QScrollArea{background:transparent; border:none;}"
+            "QScrollBar:vertical{background:transparent; width:8px; margin:4px;}"
+            f"QScrollBar::handle:vertical{{background:{t['text_muted']}; border-radius:4px; min-height:24px;}}"
+            f"QScrollBar::handle:vertical:hover{{background:{t['accent']};}}"
+            "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical{height:0px;}"
+        )
 
         self.page = QWidget()
-        self.page.setStyleSheet("background:" + theme["bg"] + ";")
+        self.page.setStyleSheet("background:transparent;")
         self.page_lay = QVBoxLayout(self.page)
-        self.page_lay.setContentsMargins(72, 52, 72, 40)
+        self.page_lay.setContentsMargins(48, 40, 48, 32)
         self.page_lay.setSpacing(0)
         self.page_lay.addStretch()
         self.scroll.setWidget(self.page)
+        self.stack.addWidget(self.scroll)
 
-        self.footer = QWidget()
+        self.stack.setCurrentWidget(self.welcome)
+        lay.addWidget(self.stack)
+
+        # Footer bar
+        self.footer = QFrame()
         self.footer.setFixedHeight(44)
         self.footer.setStyleSheet(
-            "background:" + theme["surface"] + ";"
-            "border-top:1px solid " + theme["border"] + ";"
+            f"QFrame{{background:{t['card2']}; border:none; border-bottom-left-radius:{CARD_RADIUS}px; border-bottom-right-radius:{CARD_RADIUS}px;}}"
         )
         fl = QHBoxLayout(self.footer)
-        fl.setContentsMargins(72, 0, 72, 0)
+        fl.setContentsMargins(48, 0, 48, 0)
 
         self.time_lbl = QLabel("")
-        self.time_lbl.setFont(body_font(9, italic=True))
-        self.time_lbl.setStyleSheet("color:" + theme["text_muted"] + ";background:transparent;")
+        self.time_lbl.setFont(body_font(9, italic=True, lang=lang))
+        self.time_lbl.setStyleSheet(f"color:{t['text_muted']}; background:transparent;")
 
         self.music_lbl = QLabel("")
-        self.music_lbl.setFont(body_font(10))
-        self.music_lbl.setStyleSheet("color:" + theme["text_muted"] + ";background:transparent;")
+        self.music_lbl.setFont(body_font(10, lang=lang))
+        self.music_lbl.setStyleSheet(f"color:{t['text_muted']}; background:transparent;")
         self.music_lbl.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
 
         fl.addWidget(self.time_lbl)
         fl.addStretch()
         fl.addWidget(self.music_lbl)
-
-        lay.addWidget(self.scroll)
         lay.addWidget(self.footer)
+        self.footer.hide()
 
-    def _clear(self):
+    def show_welcome(self):
+        self.stack.setCurrentWidget(self.welcome)
+        self.footer.hide()
+
+    def _clear_page(self):
         for i in reversed(range(self.page_lay.count())):
             item = self.page_lay.itemAt(i)
             if item and item.widget():
                 item.widget().setParent(None)
 
     def load_chapter(self, chapter, book):
-        self._clear()
+        self.stack.setCurrentWidget(self.scroll)
+        self.footer.show()
+        self._clear_page()
         t = self.theme
         s = LANG_STRINGS[self.lang]
 
         crumb = QLabel(book["icon"] + "  " + book["title"][self.lang])
-        crumb.setFont(body_font(9))
-        crumb.setStyleSheet("color:" + t["text_muted"] + ";background:transparent;")
+        crumb.setFont(body_font(9, lang=self.lang))
+        crumb.setStyleSheet(f"color:{t['text_muted']}; background:transparent;")
 
         title = QLabel(chapter["title"][self.lang])
         title.setFont(body_font(28, bold=True, lang=self.lang))
         title.setWordWrap(True)
-        title.setStyleSheet("color:" + t["text"] + ";background:transparent;margin-top:8px;margin-bottom:4px;")
+        title.setStyleSheet(f"color:{t['text']}; background:transparent; margin-top:8px; margin-bottom:4px;")
 
         sep = QFrame()
-        sep.setFrameShape(QFrame.Shape.HLine)
         sep.setFixedHeight(1)
-        sep.setStyleSheet("background:" + t["border"] + ";margin:12px 0 20px 0;")
+        sep.setStyleSheet(f"background:{t['hover']}; border:none; margin:12px 0 20px 0;")
 
         raw = self._load(chapter)
         body = QLabel(raw)
@@ -612,7 +660,7 @@ class ContentView(QWidget):
         body.setWordWrap(True)
         body.setTextFormat(Qt.TextFormat.RichText)
         body.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
-        body.setStyleSheet("color:" + t["text"] + ";background:transparent;")
+        body.setStyleSheet(f"color:{t['text']}; background:transparent;")
         body.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         body.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse | Qt.TextInteractionFlag.LinksAccessibleByMouse)
 
@@ -631,123 +679,91 @@ class ContentView(QWidget):
     def _load(self, chapter):
         t = self.theme
         s = LANG_STRINGS[self.lang]
-        # Content path: ~/Ana/content/{lang}/{file}
         base = os.path.expanduser("~/Ana/content")
         path = os.path.join(base, self.lang, chapter["file"])
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 return md_to_html(f.read(), t, self.lang)
         return (
-            "<p style='font-family:" + FONT_BODY + ";font-size:13px;color:" + t["text"] + ";line-height:1.8;margin-bottom:14px;'>"
+            "<p style='font-family:" + get_body_font_family(self.lang) + ";font-size:15px;color:" + t["text"] + ";line-height:1.8;margin-bottom:14px;'>"
             + s["not_written"] + "</p>"
             "<p style='font-family:" + FONT_ANA + ";font-size:15px;color:" + t["text_muted"] + ";'>"
             + s["check_back"] + "</p>"
         )
 
-
 # ─── Main Window ──────────────────────────────────────────────────────────────
 
 class AnaWindow(QMainWindow):
-    def __init__(self, lang, theme):
+    def __init__(self, lang, dark, edition):
         super().__init__()
         self.lang = lang
-        self.theme = theme
+        self.dark = dark
+        self.edition = edition
+        self.theme = THEMES[get_theme_key(edition, dark)]
+        if os.path.exists(ICON_PATH):
+            self.setWindowIcon(QIcon(ICON_PATH))
         self._build()
 
     def _build(self):
         self.setWindowTitle("Ana")
         self.setMinimumSize(960, 620)
         self.resize(1140, 720)
-        self.setStyleSheet("background:" + self.theme["bg"] + ";")
-        if os.path.exists(ICON_PATH):
-            self.setWindowIcon(QIcon(ICON_PATH))
-
         central = QWidget()
         self.setCentralWidget(central)
+        self._build_into(central)
+
+    def _build_into(self, central):
+        t = self.theme
+        central.setStyleSheet(f"background:{t['app_bg']};")
         root = QHBoxLayout(central)
-        root.setContentsMargins(0, 0, 0, 0)
-        root.setSpacing(0)
+        root.setContentsMargins(20, 20, 20, 20)
+        root.setSpacing(16)
 
         self.sidebar = Sidebar(
-            self.lang, self.theme,
+            self.lang, self.theme, self.edition,
             on_chapter=self._on_chapter,
             on_toggle_theme=self._toggle_theme,
             on_change_lang=self._change_lang,
         )
         root.addWidget(self.sidebar)
 
-        div = QFrame()
-        div.setFixedWidth(1)
-        div.setStyleSheet("background:" + self.theme["border"] + ";")
-        root.addWidget(div)
-
-        self.stack = QStackedWidget()
-        self.welcome = WelcomeScreen(self.lang, self.theme)
         self.content = ContentView(self.lang, self.theme)
-        self.stack.addWidget(self.welcome)
-        self.stack.addWidget(self.content)
-        self.stack.setCurrentWidget(self.welcome)
-        root.addWidget(self.stack)
+        root.addWidget(self.content)
 
     def _on_chapter(self, chapter, book):
-        self.stack.setCurrentWidget(self.content)
         self.content.load_chapter(chapter, book)
 
     def _toggle_theme(self):
-        self.theme = THEME_DARK if self.theme["name"] == "light" else THEME_LIGHT
-        self._rebuild()
+        if self.edition == "sayuri":
+            return
+        self.dark = not self.dark
+        cfg = load_config()
+        cfg["dark"] = self.dark
+        save_config(cfg)
+        self.theme = THEMES[get_theme_key(self.edition, self.dark)]
+        central = QWidget()
+        self.setCentralWidget(central)
+        self._build_into(central)
 
     def _change_lang(self):
-        # Save lang as empty to force selector next time, then restart
         cfg = load_config()
         cfg.pop("lang", None)
         save_config(cfg)
-        # Show lang selector overlay
         self.close()
-        show_lang_selector(self.theme)
-
-    def _rebuild(self):
-        central = QWidget()
-        self.setCentralWidget(central)
-        root = QHBoxLayout(central)
-        root.setContentsMargins(0, 0, 0, 0)
-        root.setSpacing(0)
-
-        self.sidebar = Sidebar(
-            self.lang, self.theme,
-            on_chapter=self._on_chapter,
-            on_toggle_theme=self._toggle_theme,
-            on_change_lang=self._change_lang,
-        )
-        root.addWidget(self.sidebar)
-
-        div = QFrame()
-        div.setFixedWidth(1)
-        div.setStyleSheet("background:" + self.theme["border"] + ";")
-        root.addWidget(div)
-
-        self.stack = QStackedWidget()
-        self.welcome = WelcomeScreen(self.lang, self.theme)
-        self.content = ContentView(self.lang, self.theme)
-        self.stack.addWidget(self.welcome)
-        self.stack.addWidget(self.content)
-        self.stack.setCurrentWidget(self.welcome)
-        root.addWidget(self.stack)
-
-        self.setStyleSheet("background:" + self.theme["bg"] + ";")
+        show_lang_selector(self.theme, self.dark, self.edition)
 
 
 class LangSelectorWindow(QMainWindow):
-    def __init__(self, theme):
+    def __init__(self, theme, dark, edition):
         super().__init__()
         self.theme = theme
+        self.dark = dark
+        self.edition = edition
         self.setWindowTitle("Ana")
         self.setMinimumSize(500, 400)
         self.resize(600, 480)
-        self.setStyleSheet("background:" + theme["bg"] + ";")
         if os.path.exists(ICON_PATH):
             self.setWindowIcon(QIcon(ICON_PATH))
-
         central = LanguageScreen(theme, self._on_select)
         self.setCentralWidget(central)
 
@@ -756,18 +772,15 @@ class LangSelectorWindow(QMainWindow):
         cfg["lang"] = lang
         save_config(cfg)
         self.close()
-        win = AnaWindow(lang, self.theme)
+        win = AnaWindow(lang, self.dark, self.edition)
         win.show()
         self._main_win = win
 
 
-def show_lang_selector(theme=None):
-    if theme is None:
-        theme = THEME_LIGHT
-    win = LangSelectorWindow(theme)
+def show_lang_selector(theme, dark, edition):
+    win = LangSelectorWindow(theme, dark, edition)
     win.show()
     return win
-
 
 # ─── Entry ────────────────────────────────────────────────────────────────────
 
@@ -776,15 +789,17 @@ def main():
     app.setApplicationName("Ana")
     app.setOrganizationName("Wagashi Linux")
 
+    edition = detect_edition()
     cfg = load_config()
     lang = cfg.get("lang")
-    theme = THEME_LIGHT
+    dark = cfg.get("dark", edition == "sayuri")
+    theme = THEMES[get_theme_key(edition, dark)]
 
     if lang and lang in ("en", "es", "ja"):
-        win = AnaWindow(lang, theme)
+        win = AnaWindow(lang, dark, edition)
         win.show()
     else:
-        win = show_lang_selector(theme)
+        win = show_lang_selector(theme, dark, edition)
 
     sys.exit(app.exec())
 
