@@ -95,8 +95,12 @@ BOOKS = [
         "chapters": [
             {"title": {"en": "The desktop",  "es": "El escritorio", "ja": "デスクトップ"},  "file": "basics/desktop.md",      "reading_time": 3, "music": ("Gorillaz",      "Feel Good Inc.")},
             {"title": {"en": "Applications", "es": "Aplicaciones",  "ja": "アプリ"},         "file": "basics/applications.md", "reading_time": 2, "music": ("Dorian",        "La Tormenta de Arena")},
-            {"title": {"en": "dango",        "es": "dango",         "ja": "dango"},          "file": "basics/dango.md",        "reading_time": 4, "music": ("Carlos Sadness","No Vuelvas a Japon")},
+            {"title": {"en": "dango and Mochi", "es": "dango y Mochi", "ja": "dango と Mochi"}, "file": "basics/dango.md",        "reading_time": 4, "music": ("Carlos Sadness","No Vuelvas a Japon")},
             {"title": {"en": "Updates",      "es": "Actualizaciones","ja": "アップデート"},   "file": "basics/updates.md",      "reading_time": 2, "music": ("Illenium",      "Crawl Outta Love")},
+            {"title": {"en": "Files and folders", "es": "Archivos y carpetas", "ja": "ファイルとフォルダー"}, "file": "basics/files.md", "reading_time": 5, "music": ("Migala", "Sahara")},
+            {"title": {"en": "Shortcuts that make life easier", "es": "Atajos que te facilitan la vida", "ja": "生活を楽にするショートカット"}, "file": "basics/shortcuts.md", "reading_time": 3, "music": ("Avicii", "Wake Me Up")},
+            {"title": {"en": "Connecting to the internet", "es": "Conectarse a Internet", "ja": "インターネットに接続する"}, "file": "basics/internet.md", "reading_time": 3, "music": ("Bishop Briggs", "River")},
+            {"title": {"en": "Settings", "es": "Configuración", "ja": "設定"}, "file": "basics/settings.md", "reading_time": 3, "music": ("Alan Walker", "Faded")},
         ]
     },
     {
