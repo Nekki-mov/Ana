@@ -50,11 +50,11 @@ Tarde o temprano necesitarás algo que no viene instalado.
 
 No pasa nada.
 
-Para eso existe dango.
+Para eso existen dango y Mochi.
 
-dango es la forma que tiene Wagashi Linux de buscar, instalar y gestionar aplicaciones.
+dango es la forma que tiene Wagashi Linux de buscar, instalar y gestionar aplicaciones. Mochi es su cara visual — ábrelo desde el menú y verás todo como botones en lugar de comandos.
 
-Encontrarás un capítulo completo dedicado a él cuando llegue el momento.
+Encontrarás un capítulo completo dedicado a ellos cuando llegue el momento.
 
 Por ahora sólo necesitas recordar una cosa:
 

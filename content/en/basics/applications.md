@@ -50,11 +50,11 @@ Sooner or later, you'll need something that isn't already installed.
 
 That's perfectly normal.
 
-That's what dango is for.
+That's what dango and Mochi are for.
 
-dango is Wagashi Linux's way of finding, installing, and managing applications.
+dango is Wagashi Linux's way of finding, installing, and managing applications. Mochi is its graphical face — open it from the menu and you'll see everything as buttons instead of commands.
 
-There's an entire chapter dedicated to it, and you'll get there when the time comes.
+There's an entire chapter dedicated to them, and you'll get there when the time comes.
 
 For now, there's only one thing you need to remember:
 
